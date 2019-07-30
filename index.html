@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Authorization Code Test Page</title>
+		<script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+		<script type="text/javascript" src="/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="/main.css" />
+	</head>
+	<body>
+		<h1>Authorization Code Test Page</h1>
+		<p>This page is used as a langing page for the Authorization Code Flow, and it can exchange an authorization code for a JWT/bearer token.</p>
+
+		<p id="codelbl">Authorization code: <span id="code"></span></p>
+
+		<p id="tokenlbl">Code exchange result:
+			<pre id="token"></pre>
+			<pre id="token-err"></pre>
+		</p>
+
+		<p id="id-token-lbl">Decoded id_token:
+			<pre id="id-token"></pre>
+		</p>
+	</body>
+</html>

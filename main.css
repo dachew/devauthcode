@@ -1,0 +1,18 @@
+body {
+	font-family: tahoma;
+	font-sie: 10pt;
+	background-color: #202020;
+	color: #fff;
+}
+
+pre {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+#token-err {
+	color: dd0000;
+}
