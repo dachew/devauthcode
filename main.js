@@ -47,11 +47,8 @@ exchangeCodeForToken = (code) => {
 	$.post(options, (data) => {
 		$('#token').html(JSON.stringify(data, null, 2))
 		if (data.id_token) {
-			//console.log(`id token present: ${data.id_token}`)
 			const match = data.id_token.match(/\.(.*?)\./)[1]
-			//console.log(`match: ${match}`)
 			const token = JSON.parse(atob(match))
-			console.log(`token: ${JSON.stringify(token, null, 2)}`)
 			$('#id-token').text(`ID Token: ${JSON.stringify(token, null, 2)}`)
 		}
 	})
