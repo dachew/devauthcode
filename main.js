@@ -1,10 +1,10 @@
 
 // Application constants - change these per your local setup
 const config = {
-	'serviceRoot': 'http://devauth.daptiv.com',
+	'serviceRoot': 'https://bluauth.daptiv.com',
 	'redirectUri': 'http://test/',
 	'client': {
-		'id':'idsrvauthcode-jwt',
+		'id':'idsrvauthcode-ref',
 		'secret': 'password',
 		'scopes': [ 'openid', 'offline_access', 'ppm' ]
 	}

@@ -1,8 +1,12 @@
 body {
 	font-family: tahoma;
 	font-sie: 10pt;
-	background-color: #202020;
+	background-color: #1c1c1c;
 	color: #fff;
+}
+
+p {
+	color: #d1d0cf;
 }
 
 pre {
@@ -15,8 +19,8 @@ pre {
 }
 
 a {
-	font-size: 12pt;
-	color: #c0c0f0;
+	font-size: 1.1em;
+	color: #daedf7;
 }
 
 #token-err {
