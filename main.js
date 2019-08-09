@@ -2,36 +2,76 @@
 // Application constants - change these per your local setup
 const config = {
 	'serviceRoot': 'http://devauth.daptiv.com',
-	'redirectUri': 'http://devauthcode.daptiv.com/',
+	'redirectUri': 'http://test/',
 	'client': {
-		'id':'idsrvauthcode',
+		'id':'idsrvauthcode-jwt',
 		'secret': 'password',
 		'scopes': [ 'openid', 'offline_access', 'ppm' ]
 	}
 }
 
 $(document).ready(() => {
-	const state = generateRandomValue()
-
-	let code = getCodeFromUrl(window.location.search)
-	if (code) {
-		$('#code').text(code)
-		exchangeCodeForToken(code)
-	} else {
-		$('#code').text(`Could not find code parameter in URL`)
+	if (!getValFromUrl('code')) {
+		// starting out - invoke the authorize endpoint and start the login process
+		redirectToAuthorize()
+	}
+	else {
+		// change the code for a token!
+		const code = getValFromUrl('code')
+		const state = getValFromUrl('state')
+		if (code) {
+			$('#code').text(code)
+			$('#stateVal').text(state)
+			exchangeCodeForToken(code, state)
+		} else {
+			$('#code').text(`Could not find code parameter in URL`)
+		}
 	}
 })
 
+redirectToAuthorize = () => {
+	const state = generateRandomValue()
+	$.cookie('state', state)
+
+	const options = {
+		url: `${config.serviceRoot}/connect/authorize`,
+		data: {
+			'client_id': config.client.id,
+			'response_type': 'code',
+			'scope': config.client.scopes.join(' '),
+			'state': state,
+			'redirect_uri': config.redirectUri
+		}
+	}
+	const uri = `${options.url}?${projectObjetToQuerystring(options.data)}`
+	console.log(`getting authorize endpoint info: ${JSON.stringify(options, null, 2)}`)
+	console.log(`uri: ${uri}`)
+	window.location.href = uri
+}
+
+projectObjetToQuerystring = (obj) => {
+	return Object.keys(obj).map(key => {
+		return `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
+	})
+	.join('&')
+}
+
 // Gets the authorization code from the URL
-getCodeFromUrl = (search) => {
-    let searchParams = new URLSearchParams(search)
-    if (searchParams.has('code')) {
-    	return searchParams.get('code')
+getValFromUrl = (key) => {
+    const searchParams = new URLSearchParams(window.location.search)
+    if (searchParams.has(key)) {
+    	return searchParams.get(key)
 	}
 }
 
 // Exchanges the authorization code for a token
-exchangeCodeForToken = (code) => {
+exchangeCodeForToken = (code, state) => {
+	const orig_state = $.cookie('state')
+	if (state !== orig_state) {
+		$('#token-err').text(`Failure: State does not match!  Original state: "${orig_state}" does not equal returned state: "${state}"`)
+		return
+	}
+	$.removeCookie('state')
 	console.log(`Exchanging ${code} for a token`)
 	const options = {
 		url: `${config.serviceRoot}/connect/token`,

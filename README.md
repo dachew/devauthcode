@@ -4,8 +4,9 @@ This page is used as the final redirect page for an authorization code flow.  It
 ## How to use
 
 - Copy the auth-test-site.conf file to your nginx configuration directory and restart nginx
-- Add a hosts file entry for `http://devauthcode.daptiv.com/`:
-  - `127.0.0.1 devauthcode.daptiv.com`
+  - Change the path to the site root to match your local setup
+- Add a hosts file entry for `http://devauthcode.daptiv.com/` and `http://test/`:
+  - `127.0.0.1 devauthcode.daptiv.com test`
 - Generate an authorization request, similar to `http://devauth.daptiv.com/connect/authorize?redirect_uri=http%3A%2F%2Fdevauthcode.daptiv.com%2F&client_id=idsrvauthcode&response_type=code&scope=openid%20ppm%20offline_access&state=57f890eee56a49418129d2c9a08f9a4d`
 - Complete the login using valid dev PPM credentials
 - Observe the exchanged token.
@@ -16,7 +17,7 @@ Here are 2 client configuration JSON blobs that will work with the Auth service
 ### Reference
 ```
 {
-    "Id": "idsrvauthcode",
+    "Id": "idsrvauthcode-ref",
     "Name": "Test Authorization Code Flow",
     "Secret": "password",
     "Flow": "AuthorizationCode",
@@ -28,7 +29,8 @@ Here are 2 client configuration JSON blobs that will work with the Auth service
     "AccessTokenLifetime": 604800,
     "RefreshTokenLifetime": 2592000,
     "RedirectUris": [
-      "http://devauthcode.daptiv.com/"
+      "http://devauthcode.daptiv.com/",
+      "http://test/"
     ],
     "AllowedScopes": [
       "openid",
@@ -41,7 +43,7 @@ Here are 2 client configuration JSON blobs that will work with the Auth service
 ### JWT
 ```
 {
-    "Id": "idsrvauthcode",
+    "Id": "idsrvauthcode-jwt",
     "Name": "Test Authorization Code Flow",
     "Secret": "password",
     "Flow": "AuthorizationCode",
@@ -53,7 +55,8 @@ Here are 2 client configuration JSON blobs that will work with the Auth service
     "AccessTokenLifetime": 604800,
     "RefreshTokenLifetime": 2592000,
     "RedirectUris": [
-      "http://devauthcode.daptiv.com/"
+      "http://devauthcode.daptiv.com/",
+      "http://test/"
     ],
     "AllowedScopes": [
       "openid",
