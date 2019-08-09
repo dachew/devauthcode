@@ -13,9 +13,11 @@ const config = {
 $(document).ready(() => {
 	if (!getValFromUrl('code')) {
 		// starting out - invoke the authorize endpoint and start the login process
-		redirectToAuthorize()
+		$('#initiate-auth').show()
+		$('#authorize').attr('href', getLinkToAuthorize())
 	}
 	else {
+		$('#display-auth').show()
 		// change the code for a token!
 		const code = getValFromUrl('code')
 		const state = getValFromUrl('state')
@@ -29,7 +31,7 @@ $(document).ready(() => {
 	}
 })
 
-redirectToAuthorize = () => {
+getLinkToAuthorize = () => {
 	const state = generateRandomValue()
 	$.cookie('state', state)
 
@@ -46,7 +48,7 @@ redirectToAuthorize = () => {
 	const uri = `${options.url}?${projectObjetToQuerystring(options.data)}`
 	console.log(`getting authorize endpoint info: ${JSON.stringify(options, null, 2)}`)
 	console.log(`uri: ${uri}`)
-	window.location.href = uri
+	return uri
 }
 
 projectObjetToQuerystring = (obj) => {

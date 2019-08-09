@@ -13,6 +13,11 @@ pre {
 	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
+a {
+	font-size: 12pt;
+	color: #c0c0f0;
+}
+
 #token-err {
 	color: dd0000;
 }

@@ -14,19 +14,25 @@
 		<h1>Authorization Code Test Page</h1>
 		<p>This page is used as a langing page for the Authorization Code Flow, and it can exchange an authorization code for a JWT/bearer token.</p>
 
-		<p id="codelbl">Authorization code: <span id="code"></span></p>
+		<div id="initiate-auth" style="display:none">
+			<p>You are not currently logged in.  Click <a href="#" id="authorize">here</a> to start the auth code login process.
+		</div>
 
-		<p id="tokenlbl">Code exchange result:
-			<pre id="token"></pre>
-			<pre id="token-err"></pre>
-		</p>
+		<div id="display-auth" style="display:none">
+			<p id="codelbl">Authorization code: <span id="code"></span></p>
 
-		<p id="state">Original State:
-			<pre id="stateVal"></pre>
-		</p>
+			<p id="tokenlbl">Code exchange result:
+				<pre id="token"></pre>
+				<pre id="token-err"></pre>
+			</p>
 
-		<p id="id-token-lbl">Decoded id_token:
-			<pre id="id-token"></pre>
-		</p>
+			<p id="state">Original State:
+				<pre id="stateVal"></pre>
+			</p>
+
+			<p id="id-token-lbl">Decoded id_token:
+				<pre id="id-token"></pre>
+			</p>
+		</div>
 	</body>
 </html>
